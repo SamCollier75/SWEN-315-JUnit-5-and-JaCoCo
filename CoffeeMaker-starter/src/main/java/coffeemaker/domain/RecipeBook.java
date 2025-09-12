@@ -111,7 +111,19 @@ public class RecipeBook {
   public String replaceRecipe(int recipeToReplace, Recipe newRecipe) {
     if (recipeArray[recipeToReplace] != null) {
       String recipeName = recipeArray[recipeToReplace].getName();
-      newRecipe.setName("");
+
+      boolean exists = false;
+      //Check that recipe doesn't already exist in the array
+      for (int i = 0; i < recipeArray.length; i++) {
+        if (newRecipe.equals(recipeArray[i])) {
+          exists = true;
+        }
+      }
+
+      if (exists) {
+        return null;
+      }
+      
       recipeArray[recipeToReplace] = newRecipe;
       return recipeName;
     } else {
