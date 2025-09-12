@@ -76,6 +76,15 @@ public class RecipeTest {
         assertEquals(x, CuT.getPrice());
     }
 
+    @Test
+    void setPrice_3() {
+        // Couldn't tell you why but this test is needed for jacoco to recognize
+        // that the negative integer path is being covered
+        RecipeException exception = assertThrows(RecipeException.class,
+        () -> CuT.setPrice("-2"));
+        assertEquals("Price must be a positive integer", exception.getMessage());        
+    }
+
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = {" ", "-1", "-999", "3.14159"})
@@ -93,6 +102,15 @@ public class RecipeTest {
         CuT.setAmtCoffee(Integer.toString(x));
         assertEquals(x, CuT.getAmtCoffee());
     }
+
+    @Test
+    void setAmtCoffee_3() {
+        // Couldn't tell you why but this test is needed for jacoco to recognize
+        // that the negative integer path is being covered
+        RecipeException exception = assertThrows(RecipeException.class,
+        () -> CuT.setAmtCoffee("-2"));
+        assertEquals("Units of coffee must be a positive integer", exception.getMessage());        
+    }    
 
     @ParameterizedTest
     @NullAndEmptySource
@@ -112,6 +130,15 @@ public class RecipeTest {
         assertEquals(x, CuT.getAmtMilk());
     }
 
+    @Test
+    void setAmtMilk_3() {
+        // Couldn't tell you why but this test is needed for jacoco to recognize
+        // that the negative integer path is being covered
+        RecipeException exception = assertThrows(RecipeException.class,
+        () -> CuT.setAmtMilk("-2"));
+        assertEquals("Units of milk must be a positive integer", exception.getMessage());        
+    }       
+
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = {" ", "-1", "-999", "3.14159"})
@@ -130,6 +157,44 @@ public class RecipeTest {
         CuT.setAmtSugar(Integer.toString(x));
         assertEquals(x, CuT.getAmtSugar());
     }
+
+    @Test
+    void setAmtSugar_3() {
+        // Couldn't tell you why but this test is needed for jacoco to recognize
+        // that the negative integer path is being covered
+        RecipeException exception = assertThrows(RecipeException.class,
+        () -> CuT.setAmtSugar("-2"));
+        assertEquals("Units of sugar must be a positive integer", exception.getMessage());        
+    }        
+
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {" ", "-1", "-999", "3.14159"})
+    void setAmtChocolate_1(String x) {
+        // testing assertion
+        RecipeException exception = assertThrows(RecipeException.class,
+        () -> CuT.setAmtChocolate(""));
+        //RecipeException does not have a built in message
+        assertEquals("Units of chocolate must be a positive integer", exception.getMessage());
+    }  
+
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2, 9999, 34})
+    void setAmtChocolate_2(int x) {
+        CuT.setAmtChocolate(Integer.toString(x));
+        assertEquals(x, CuT.getAmtChocolate());
+    }
+
+    @Test
+    void setAmtChocolate_3() {
+        // Couldn't tell you why but this test is needed for jacoco to recognize
+        // that the negative integer path is being covered
+        RecipeException exception = assertThrows(RecipeException.class,
+        () -> CuT.setAmtChocolate("-2"));
+        assertEquals("Units of chocolate must be a positive integer", exception.getMessage());        
+    }       
 
     @Test
     public void hashCode_1() {
@@ -205,6 +270,26 @@ public class RecipeTest {
         CuT2.setPrice("43");     
           
         assertNotEquals(CuT, CuT2);
+    }
+
+    @Test
+    public void equals_6() {
+        CuT.setAmtChocolate("2");
+        CuT.setAmtCoffee("3");
+        CuT.setAmtMilk("1");
+        CuT.setAmtSugar("6");
+        CuT.setName("Test1"); 
+        CuT.setPrice("43");   
+
+        Recipe CuT2 = new Recipe();
+        CuT2.setAmtChocolate("2");
+        CuT2.setAmtCoffee("3");
+        CuT2.setAmtMilk("1");
+        CuT2.setAmtSugar("6");
+        CuT2.setName("Test1"); 
+        CuT2.setPrice("43");   
+        
+        assertEquals(CuT, CuT2);
     }
 
 

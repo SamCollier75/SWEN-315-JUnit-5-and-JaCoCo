@@ -44,8 +44,7 @@ public class Recipe {
     if (name == null) {
       throw new RecipeException("Name must have at least one non-blank character");      
     }
-    if (name.length() == 0 ||
-        name == "") {
+    if (name.length() == 0) {
       throw new RecipeException("Name must have at least one non-blank character");
     }
     this.name = name;
