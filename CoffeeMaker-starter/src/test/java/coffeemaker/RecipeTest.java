@@ -47,8 +47,9 @@ public class RecipeTest {
     @Test
     public void setName_3() {
         // "It must have a non-null String name (class description)"        
-        CuT.setName(null);
-        assertNotNull(CuT.getName());
+        RecipeException exception = assertThrows(RecipeException.class,
+        () -> CuT.setName(null));
+        assertEquals("Name must have at least one non-blank character", exception.getMessage());
     }
 
     @Test
@@ -133,14 +134,13 @@ public class RecipeTest {
     @Test
     public void hashCode_1() {
         CuT.setName("Test1");
-        int expectedHash = 80698846;
+        int expectedHash = -1793304000;
         assertEquals(CuT.hashCode(), expectedHash);
     }
 
     @Test
     public void hashCode_2() {
-        CuT.setName(null);
-        // testing that name doesn't change from "" when set to null
+        // testing that blank CuT is just 1 * 31 (result * prime)
         int expectedHash = 31;
         assertEquals(CuT.hashCode(), expectedHash);
     }
@@ -168,13 +168,25 @@ public class RecipeTest {
 
     @Test
     public void equals_3() {
-        CuT.setName("Test1");
-        CuT.setAmtChocolate("1");
+        CuT.setAmtChocolate("3");
+        CuT.setAmtCoffee("4");
+        CuT.setAmtMilk("5");
+        CuT.setAmtSugar("7");
+        CuT.setPrice("4");
+        
+        CuT.setName("Test1");         
+
         Recipe CuT2 = new Recipe();
-        CuT2.setName("Test1");
         CuT2.setAmtChocolate("2");
-        // Two objects with different states should not be equal
-        assertNotEquals(CuT2, CuT2);
+        CuT2.setAmtCoffee("3");
+        CuT2.setAmtMilk("1");
+        CuT2.setAmtSugar("6");
+        CuT2.setPrice("43");   
+
+        CuT2.setName("Test1"); 
+
+        // Two objects with different states, but same name should not be equal
+        assertNotEquals(CuT, CuT2);
     }
 
     @Test 
@@ -185,13 +197,20 @@ public class RecipeTest {
     @Test
     public void equals_5() {
         Recipe CuT2 = new Recipe();
-        CuT2.setName("Test1");
+        CuT2.setAmtChocolate("2");
+        CuT2.setAmtCoffee("3");
+        CuT2.setAmtMilk("1");
+        CuT2.setAmtSugar("6");
+        CuT2.setName("Test1"); 
+        CuT2.setPrice("43");     
+          
         assertNotEquals(CuT, CuT2);
     }
 
+
     @Test
     public void toString_1() {
-        CuT.setName(null); // defaults to this anyways
+        // .name defaults to ""
         assertEquals(CuT.toString(), "Recipe{}");
     }
 

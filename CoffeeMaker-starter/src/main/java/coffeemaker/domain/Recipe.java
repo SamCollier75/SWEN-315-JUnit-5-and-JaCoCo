@@ -41,9 +41,14 @@ public class Recipe {
    * @param name The name to set; must have at least one non-blank character.
    */
   public void setName(String name) {
-    if (name != null) {
-      this.name = name;
+    if (name == null) {
+      throw new RecipeException("Name must have at least one non-blank character");      
     }
+    if (name.length() == 0 ||
+        name == "") {
+      throw new RecipeException("Name must have at least one non-blank character");
+    }
+    this.name = name;
   }
 
   /**
@@ -182,7 +187,13 @@ public class Recipe {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = result + name.hashCode() +
+             Integer.hashCode(price) +
+             Integer.hashCode(amtCoffee) +
+             Integer.hashCode(amtMilk) + 
+             Integer.hashCode(amtSugar) +
+             Integer.hashCode(amtChocolate);
+    result = prime * result;
     return result;
   }
 
@@ -198,14 +209,15 @@ public class Recipe {
       return false;
     }
     final Recipe other = (Recipe) obj;
-    if (name == null) {
-      if (other.name != null) {
-        return false;
-      }
-    } else if (!name.equals(other.name)) {
-      return false;
+    if (this.name.equals(other.name) &&
+        this.price == other.price &&
+        this.amtChocolate == other.amtChocolate &&
+        this.amtMilk == other.amtMilk &&
+        this.amtSugar == other.amtSugar &&
+        this.amtChocolate == other.amtChocolate) {
+      return true;
     }
-    return true;
+    return false;
   }
 
 }
