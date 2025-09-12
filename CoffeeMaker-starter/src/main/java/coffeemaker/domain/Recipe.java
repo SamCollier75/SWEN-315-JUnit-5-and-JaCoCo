@@ -210,7 +210,7 @@ public class Recipe {
     final Recipe other = (Recipe) obj;
     if (this.name.equals(other.name) &&
         this.price == other.price &&
-        this.amtChocolate == other.amtChocolate &&
+        this.amtCoffee == other.amtCoffee &&
         this.amtMilk == other.amtMilk &&
         this.amtSugar == other.amtSugar &&
         this.amtChocolate == other.amtChocolate) {

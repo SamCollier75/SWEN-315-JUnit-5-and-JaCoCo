@@ -272,6 +272,7 @@ public class RecipeTest {
         assertNotEquals(CuT, CuT2);
     }
 
+
     @Test
     public void equals_6() {
         CuT.setAmtChocolate("2");
@@ -291,6 +292,74 @@ public class RecipeTest {
         
         assertEquals(CuT, CuT2);
     }
+
+    @Test
+    public void equals_7() {
+        CuT.setAmtChocolate("23");
+        CuT.setAmtCoffee("3");
+        CuT.setAmtMilk("1");
+        CuT.setAmtSugar("6");
+        CuT.setName("Test1"); 
+        CuT.setPrice("43");   
+
+        Recipe CuT2 = new Recipe();
+        CuT2.setAmtChocolate("2");
+        CuT2.setAmtCoffee("34");
+        CuT2.setAmtMilk("11");
+        CuT2.setAmtSugar("6");
+        CuT2.setName("Test1"); 
+        CuT2.setPrice("43");   
+        
+        assertNotEquals(CuT, CuT2);
+    }  
+
+    @Test
+    public void equals_8() {
+        Recipe CuT2 = new Recipe();
+        CuT2.setAmtChocolate("2");  
+          
+        assertNotEquals(CuT, CuT2);        
+    }  
+
+    @Test
+    public void equals_9() {
+        Recipe CuT2 = new Recipe();
+        CuT2.setAmtCoffee("2");  
+          
+        assertNotEquals(CuT, CuT2);        
+    }       
+
+    @Test
+    public void equals_10() {
+        Recipe CuT2 = new Recipe();
+        CuT2.setAmtMilk("2");  
+          
+        assertNotEquals(CuT, CuT2);        
+    }       
+
+    @Test
+    public void equals_11() {
+        Recipe CuT2 = new Recipe();
+        CuT2.setAmtSugar("2");  
+          
+        assertNotEquals(CuT, CuT2);        
+    }       
+
+    @Test
+    public void equals_12() {
+        Recipe CuT2 = new Recipe();
+        CuT2.setName("Test1");  
+          
+        assertNotEquals(CuT, CuT2);        
+    }           
+
+    @Test
+    public void equals_13() {
+        Recipe CuT2 = new Recipe();
+        CuT2.setPrice("2");  
+          
+        assertNotEquals(CuT, CuT2);        
+    }           
 
 
     @Test
