@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import coffeemaker.domain.Inventory;
+import coffeemaker.domain.Recipe;
 import coffeemaker.exceptions.InventoryException;
 
 
@@ -44,25 +45,25 @@ public class InventoryTest {
     @DisplayName("Test Case: initial setup coffee=15")
     void getCoffeTest() {
         int result = CuT.getCoffee();
-        assertEquals(15, result, "Coffee amount wrong");
+        assertEquals(15, result, "Expected 15: Coffee amount wrong");
     }
     @Test
     @DisplayName("Test Case: initial setup milk=15")
     void getMilkTest() {
         int result = CuT.getMilk();
-        assertEquals(15, result, "Milk amount wrong");
+        assertEquals(15, result, "Expected 15: Milk amount wrong");
     }
     @Test
     @DisplayName("Test Case: initial setup sugar=15")
     void getSugarTest() {
         int result = CuT.getSugar();
-        assertEquals(15, result, "Sugar amount wrong");
+        assertEquals(15, result, "Expected 15: Sugar amount wrong");
     }
     @Test
     @DisplayName("Test Case: initial setup chocolate=15")
     void getChocolateTest() {
         int result = CuT.getChocolate();
-        assertEquals(15, result, "Chocolate amount wrong");
+        assertEquals(15, result, "Expected 15: Chocolate amount wrong");
     }
 
     //Testing Sets
@@ -72,14 +73,14 @@ public class InventoryTest {
     void setCoffeeTest_1() {
         CuT.setCoffee(2);
         int result = CuT.getCoffee();
-        assertEquals(2, result, "Coffee amount set wrong");
+        assertEquals(2, result, "Expected 2: Coffee amount set wrong");
     }
     @Test
     @DisplayName("Test Case: set coffee=-1")
     void setCoffeeTest_2() {
         CuT.setCoffee(-1);
         int result = CuT.getCoffee();
-        assertEquals(15, result, "Coffee amount set wrong");
+        assertEquals(15, result, "Expected 15: Coffee amount set wrong");
     }
     //Milk
     @Test
@@ -87,21 +88,21 @@ public class InventoryTest {
     void setMilkTest_1() {
         CuT.setMilk(2);
         int result = CuT.getMilk();
-        assertEquals(2, result, "Milk amount set wrong");
+        assertEquals(2, result, "Expected 2: Milk amount set wrong");
     }
     @Test
     @DisplayName("Test Case: set milk=-1")
     void setMilkTest_2() {
         CuT.setMilk(-1);
         int result = CuT.getMilk();
-        assertEquals(15, result, "Milk amount set wrong");
+        assertEquals(15, result, "Expected 15: Milk amount set wrong");
     }
     @Test
     @DisplayName("Test Case: set sugar=2")
     void setSugarTest_1() {
         CuT.setSugar(2);
         int result = CuT.getSugar();
-        assertEquals(2, result, "Sugar amount set wrong");
+        assertEquals(2, result, "Expected 2: Sugar amount set wrong");
     }
     //Sugar
     @Test
@@ -109,7 +110,7 @@ public class InventoryTest {
     void setSugarTest_2() {
         CuT.setSugar(-1);
         int result = CuT.getSugar();
-        assertEquals(15, result, "Sugar amount set wrong");
+        assertEquals(15, result, "Expected 15: Sugar amount set wrong");
     }
     //Chocolate
     @Test
@@ -117,14 +118,14 @@ public class InventoryTest {
     void setChocolateTest_1() {
         CuT.setChocolate(2);
         int result = CuT.getChocolate();
-        assertEquals(2, result, "Chocolate amount set wrong");
+        assertEquals(2, result, "Expected 2: Chocolate amount set wrong");
     }
     @Test
     @DisplayName("Test Case: set chocolate=-1")
     void setChocolateTest_2() {
         CuT.setChocolate(-1);
         int result = CuT.getChocolate();
-        assertEquals(15, result, "Chocolate amount set wrong");
+        assertEquals(15, result, "Expected 15: Chocolate amount set wrong");
     }
 
     //Testing add items
@@ -134,7 +135,7 @@ public class InventoryTest {
     void addCoffeeTest_1() {
         CuT.addCoffee("1");
         int result = CuT.getCoffee();
-        assertEquals(16, result, "Expected 16 units of coffee");
+        assertEquals(16, result, "Expected 16: added 1 unit of coffee");
     }
     @Test
     @DisplayName("Test Case: add -1 unit of coffee")
@@ -150,13 +151,20 @@ public class InventoryTest {
         CuT.addCoffee("x");
        }, "Expected InventoryException: added x unit of coffee");
     }
+    @Test
+    @DisplayName("Test Case: add null unit of coffee")
+    void addCoffeeTest_4() {
+       assertThrows(InventoryException.class, () -> {
+        CuT.addCoffee(null);
+       }, "Expected InventoryException: added null unit of coffee");
+    }
     //Milk
     @Test
     @DisplayName("Test Case: add 1 unit of milk")
     void addMilkTest_1() {
         CuT.addMilk("1");
         int result = CuT.getMilk();
-        assertEquals(16, result, "Expected 16 units of milk");
+        assertEquals(16, result, "Expected 16: added 1 unit of milk");
     }
     @Test
     @DisplayName("Test Case: add -1 unit of milk")
@@ -172,13 +180,20 @@ public class InventoryTest {
         CuT.addMilk("x");
        }, "Expected InventoryException: added x unit of milk");
     }
+    @Test
+    @DisplayName("Test Case: add null unit of milk")
+    void addMilkTest_4() {
+       assertThrows(InventoryException.class, () -> {
+        CuT.addMilk(null);
+       }, "Expected InventoryException: added null unit of milk");
+    }
     //Sugar
     @Test
     @DisplayName("Test Case: add 1 unit of sugar")
     void addSugarTest_1() {
         CuT.addSugar("1");
         int result = CuT.getSugar();
-        assertEquals(16, result, "Expected 16 units of sugar");
+        assertEquals(16, result, "Expected 16: added 1 unit of sugar");
     }
     @Test
     @DisplayName("Test Case: add -1 unit of sugar")
@@ -194,13 +209,20 @@ public class InventoryTest {
         CuT.addSugar("x");
        }, "Expected InventoryException: added x unit of sugar");
     }
+    @Test
+    @DisplayName("Test Case: add null unit of sugar")
+    void addSugarTest_4() {
+       assertThrows(InventoryException.class, () -> {
+        CuT.addSugar(null);
+       }, "Expected InventoryException: added null unit of sugar");
+    }
     //Chocolate
     @Test
     @DisplayName("Test Case: add 1 unit of chocolate")
     void addChocolateTest_1() {
         CuT.addChocolate("1");
         int result = CuT.getChocolate();
-        assertEquals(16, result, "Expected 16 units of chocolate");
+        assertEquals(16, result, "Expected 16: added 1 unit of chocolate");
     }
     @Test
     @DisplayName("Test Case: add -1 unit of chocolate")
@@ -216,7 +238,183 @@ public class InventoryTest {
         CuT.addChocolate("x");
        }, "Expected InventoryException: added x unit of chocolate");
     }
+    @Test
+    @DisplayName("Test Case: add null unit of chocolate")
+    void addChocolateTest_4() {
+       assertThrows(InventoryException.class, () -> {
+        CuT.addChocolate(null);
+       }, "Expected InventoryException: added null unit of chocolate");
+    }
 
+    //Testing enough ingredients
+    //Coffee
+    @Test
+    @DisplayName("Test Case: enough coffee amount")
+    void enoughIngredientsCoffeeTest_1() {
+        CuT.setCoffee(10);
+        Recipe r = new Recipe();
+        r.setAmtCoffee("1");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, true, "Expected true: don't have enough coffee");
+    }
+    @Test
+    @DisplayName("Test Case: not enough coffee amount")
+    void enoughIngredientsCoffeeTest_2() {
+        CuT.setCoffee(1);
+        Recipe r = new Recipe();
+        r.setAmtCoffee("10");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, false, "Expected false: have enough coffee");
+    }
+    @Test
+    @DisplayName("Test Case: equal coffee amount")
+    void enoughIngredientsCoffeeTest_3() {
+        CuT.setCoffee(10);
+        Recipe r = new Recipe();
+        r.setAmtCoffee("10");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, true, "Expected true: don't have enough coffee");
+    }
+    //Milk
+    @Test
+    @DisplayName("Test Case: enough milk amount")
+    void enoughIngredientsMilkTest_1() {
+        CuT.setMilk(10);
+        Recipe r = new Recipe();
+        r.setAmtMilk("1");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, true, "Expected true: don't have enough milk");
+    }
+    @Test
+    @DisplayName("Test Case: not enough milk amount")
+    void enoughIngredientsMilkTest_2() {
+        CuT.setMilk(1);
+        Recipe r = new Recipe();
+        r.setAmtMilk("10");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, false, "Expected false: have enough milk");
+    }
+    @Test
+    @DisplayName("Test Case: equal milk amount")
+    void enoughIngredientsMilkTest_3() {
+        CuT.setMilk(10);
+        Recipe r = new Recipe();
+        r.setAmtMilk("10");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, true, "Expected true: don't have enough milk");
+    }
+    //Sugar
+    @Test
+    @DisplayName("Test Case: enough sugar amount")
+    void enoughIngredientsSugarTest_1() {
+        CuT.setSugar(10);
+        Recipe r = new Recipe();
+        r.setAmtSugar("1");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, true, "Expected true: don't have enough sugar");
+    }
+    @Test
+    @DisplayName("Test Case: not enough sugar amount")
+    void enoughIngredientsSugarTest_2() {
+        CuT.setSugar(1);
+        Recipe r = new Recipe();
+        r.setAmtSugar("10");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, false, "Expected false: have enough sugar");
+    }
+    @Test
+    @DisplayName("Test Case: equal sugar amount")
+    void enoughIngredientsSugarTest_3() {
+        CuT.setSugar(10);
+        Recipe r = new Recipe();
+        r.setAmtSugar("10");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, true, "Expected true: don't have enough sugar");
+    }
+    //Chocolate
+    @Test
+    @DisplayName("Test Case: enough chocolate amount")
+    void enoughIngredientsChocolateTest_1() {
+        CuT.setChocolate(10);
+        Recipe r = new Recipe();
+        r.setAmtChocolate("1");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, true, "Expected true: don't have enough chocolate");
+    }
+    @Test
+    @DisplayName("Test Case: not enough chocolate amount")
+    void enoughIngredientsChocolateTest_2() {
+        CuT.setChocolate(1);
+        Recipe r = new Recipe();
+        r.setAmtChocolate("10");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, false, "Expected false: have enough chocolate");
+    }
+    @Test
+    @DisplayName("Test Case: equal chocolate amount")
+    void enoughIngredientsChocolateTest_3() {
+        CuT.setChocolate(10);
+        Recipe r = new Recipe();
+        r.setAmtChocolate("10");
+        boolean result = CuT.enoughIngredients(r);
+        assertEquals(result, true, "Expected true: don't have enough chocolate");
+    }
+
+    //Testing useIngredients
+    @Test
+    @DisplayName("Test Case: not enough ingredients")
+    void useIngredientsTest_1() {
+        CuT.setCoffee(0);
+        CuT.setMilk(0);
+        CuT.setSugar(0);
+        CuT.setChocolate(0);
+        Recipe r = new Recipe();
+        r.setAmtCoffee("1");
+        r.setAmtMilk("1");
+        r.setAmtSugar("1");
+        r.setAmtChocolate("1");
+        boolean result = CuT.useIngredients(r);
+        assertEquals(result, false, "Expected false: used ingredients");
+    }
+    @Test
+    @DisplayName("Test Case: enough ingredients")
+    void useIngredientsTest_2() {
+        CuT.setCoffee(10);
+        CuT.setMilk(10);
+        CuT.setSugar(10);
+        CuT.setChocolate(10);
+        Recipe r = new Recipe();
+        r.setAmtCoffee("1");
+        r.setAmtMilk("1");
+        r.setAmtSugar("1");
+        r.setAmtChocolate("1");
+        boolean result = CuT.useIngredients(r);
+        assertEquals(result, true, "Expected true: did not use ingredients");
+    }
+
+    //Testing toString
+    @Test
+    @DisplayName("Test Case: to string, set parameters")
+    void toStringTest_1() {
+        CuT.setCoffee(0);
+        CuT.setMilk(0);
+        CuT.setSugar(0);
+        CuT.setChocolate(0);
+        String result = CuT.toString();
+        assertEquals(result, "Coffee: 0\n" + //
+                        "Milk: 0\n" + //
+                        "Sugar: 0\n" + //
+                        "Chocolate: 0\n", "Expected toString with set parameters");
+    }
+    @Test
+    @DisplayName("Test Case: to string, default parameters")
+    void toStringTes_2() {
+        String result = CuT.toString();
+        assertEquals(result, "Coffee: 15\n" + //
+                        "Milk: 15\n" + //
+                        "Sugar: 15\n" + //
+                        "Chocolate: 15\n", "Expected toString with default parameters");
+    }
 }
 
-// change error message to Expected for test gets and test sets 
+//test when haven't set a parameter 
